@@ -11,7 +11,7 @@ function askPlayerName()
 
 function getRandomNumber()
 {
-    return 7;
+    return (Math.floor(Math.random() * MAX_RANDOM_NUMBER)+1);
 }
 
 function askPlayerInput()
@@ -67,13 +67,23 @@ function runGame(playerName)
 
 }
 
+function askPlayerToPlayAgain()
+{
+    return confirm("Voulez-vous faire une nouvelle partie ?");
+}
+
 function main()
 {
     sayHello();
 
     let playerName = askPlayerName();
-    runGame(playerName);
-
+    
+    let startAGame = true;
+    while (startAGame) {
+        runGame(playerName);
+        startAGame = askPlayerToPlayAgain();
+    }
+    
     sayGoodbye();
 }
 
