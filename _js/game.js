@@ -19,20 +19,51 @@ function askPlayerInput()
     return prompt(`Quelle est votre proposition entre ${MIN_RANDOM_NUMBER} et ${MAX_RANDOM_NUMBER} ?`);
 }
 
+function checkPlayerInput(playerInput, numberToGuess)
+{
+    if (playerInput > MAX_RANDOM_NUMBER) {
+        alert(`On a dit un nombre inférieur ou égal à ${MAX_RANDOM_NUMBER} !!`);
+        return false;
+    }
+    if (playerInput < MIN_RANDOM_NUMBER) {
+        alert(`On a dit un nombre supérieur ou égal à ${MIN_RANDOM_NUMBER} !!`);
+        return false;
+    }
+    if (playerInput > numberToGuess) {
+        sayMessage(`Votre proposition est plus grande que le nombre mystère !`);
+        return false;
+    }
+    if (playerInput < numberToGuess) {
+        sayMessage(`Votre proposition est plus petite que le nombre mystère !`);
+        return false;
+    }
+    if (playerInput == numberToGuess) {
+        sayMessage(`Félicitations,le nombre mystère est bien ${numberToGuess} !`);
+        return true;
+    }
+    return false;
+}
+
 function makePlayerGuess(numberToGuess)
 {
     let playerInput = askPlayerInput();
     console.log("le joueur a saisi : " + playerInput);
-    
+    return checkPlayerInput(playerInput, numberToGuess);
 }
 
-function startGame(playerName)
+function runGame(playerName)
 {
     console.log(`Bienvenue dans le jeu du nombre mystère, ${playerName}!`);
     let numberToGuess = getRandomNumber();
     console.log("nombre mystère : " + numberToGuess);
 
-    makePlayerGuess(numberToGuess);
+    let hasFoundNumber = false;
+
+    while (!hasFoundNumber) {
+        hasFoundNumber = makePlayerGuess(numberToGuess);
+    }
+
+    sayMessage("Fin de la partie...");
 
 }
 
@@ -41,7 +72,7 @@ function main()
     sayHello();
 
     let playerName = askPlayerName();
-    startGame(playerName);
+    runGame(playerName);
 
     sayGoodbye();
 }
