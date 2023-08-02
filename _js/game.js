@@ -3,6 +3,8 @@
 const MIN_RANDOM_NUMBER = 1;
 const MAX_RANDOM_NUMBER = 10;
 
+// Liste des propositions
+var inputList = [];
 
 function askPlayerName()
 {
@@ -16,7 +18,11 @@ function getRandomNumber()
 
 function askPlayerInput()
 {
-    return prompt(`Quelle est votre proposition entre ${MIN_RANDOM_NUMBER} et ${MAX_RANDOM_NUMBER} ?`);
+    let inputMsg = "";
+    if (inputList.length > 0){
+        inputMsg = "\nVous avez déjà proposé " + inputList.join(",");
+    }
+    return prompt(`Quelle est votre proposition entre ${MIN_RANDOM_NUMBER} et ${MAX_RANDOM_NUMBER} ?${inputMsg}`);
 }
 
 function checkPlayerInput(playerInput, numberToGuess)
@@ -48,12 +54,14 @@ function makePlayerGuess(numberToGuess)
 {
     let playerInput = askPlayerInput();
     console.log("le joueur a saisi : " + playerInput);
+    inputList.push(playerInput);
     return checkPlayerInput(playerInput, numberToGuess);
 }
 
 function runGame(playerName)
 {
     console.log(`Bienvenue dans le jeu du nombre mystère, ${playerName}!`);
+    inputList = [];
     let numberToGuess = getRandomNumber();
     console.log("nombre mystère : " + numberToGuess);
 
