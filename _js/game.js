@@ -1,10 +1,11 @@
 "use strict";
 
 class Game {
+    player;
     secret;
     turn;
-    start(playerName) {
-        console.log(`Bienvenue dans le jeu du nombre mystère, ${playerName}!`);
+    start() {
+        console.log(`Bienvenue dans le jeu du nombre mystère, ${this.player.pseudo}!`);
         inputList = [];
         this.secret = getRandomNumber();
         this.turn = 0;

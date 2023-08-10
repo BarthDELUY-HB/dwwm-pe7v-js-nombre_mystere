@@ -58,22 +58,6 @@ function makePlayerGuess(numberToGuess)
     return checkPlayerInput(playerInput, numberToGuess);
 }
 
-function runGame(playerName)
-{
-    console.log(`Bienvenue dans le jeu du nombre mystère, ${playerName}!`);
-    inputList = [];
-    let numberToGuess = getRandomNumber();
-    console.log("nombre mystère : " + numberToGuess);
-
-    let hasFoundNumber = false;
-
-    while (!hasFoundNumber) {
-        hasFoundNumber = makePlayerGuess(numberToGuess);
-    }
-
-    sayMessage("Fin de la partie...");
-
-}
 
 function askPlayerToPlayAgain()
 {
@@ -84,11 +68,14 @@ function main()
 {
     sayHello();
 
-    let playerName = askPlayerName();
+    let player = new Player();
+    player.askPlayerName();
     let game = new Game();
+    game.player = player;
+
     let startAGame = true;
     while (startAGame) {
-        game.start(playerName);
+        game.start();
         startAGame = askPlayerToPlayAgain();
     }
     
