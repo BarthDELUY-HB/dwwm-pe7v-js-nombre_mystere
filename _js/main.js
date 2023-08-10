@@ -85,10 +85,10 @@ function main()
     sayHello();
 
     let playerName = askPlayerName();
-    
+    let game = new Game();
     let startAGame = true;
     while (startAGame) {
-        runGame(playerName);
+        game.start(playerName);
         startAGame = askPlayerToPlayAgain();
     }
     
